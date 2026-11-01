@@ -25,6 +25,12 @@ public final class FoliageHooks {
         return true;
     }
 
+    @SuppressWarnings("rawtypes")
+    public static boolean omitCollision(Block block, World world, int x, int y, int z,
+                                        AxisAlignedBB query, List boxes, Entity entity) {
+        return handleCollision(block, world, x, y, z, query, boxes, entity);
+    }
+
     public static boolean omitCollision(Block block, World world, int x, int y, int z, Entity entity) {
         if (!(entity instanceof EntityPlayer) || world == null || block == null || entity.boundingBox == null) return false;
         if (!isEligible(block, world, x, y, z)) return false;
