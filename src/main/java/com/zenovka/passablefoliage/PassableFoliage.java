@@ -9,8 +9,9 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid = "passablefoliage", name = "Passable Foliage", version = "0.2.0", acceptableRemoteVersions = "*")
+@Mod(modid = "passablefoliage", name = "Passable Foliage", version = "0.2.1", acceptableRemoteVersions = "*")
 public class PassableFoliage {
     public static SimpleNetworkWrapper network;
     public static boolean naturalOnly = true;
@@ -38,6 +39,6 @@ public class PassableFoliage {
         network = NetworkRegistry.INSTANCE.newSimpleChannel("passfoliage");
         network.registerMessage(FoliagePacket.Handler.class, FoliagePacket.class, 0, Side.SERVER);
         FMLCommonHandler.instance().bus().register(new FoliageServerEvents());
-        if (FMLCommonHandler.instance().getSide().isClient()) FMLCommonHandler.instance().bus().register(new FoliageClientEvents());
+        if (FMLCommonHandler.instance().getSide().isClient()) MinecraftForge.EVENT_BUS.register(new FoliageClientEvents());
     }
 }

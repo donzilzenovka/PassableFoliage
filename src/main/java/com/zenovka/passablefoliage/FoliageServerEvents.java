@@ -17,7 +17,7 @@ public class FoliageServerEvents {
             for (Object obj : server.getConfigurationManager().playerEntityList) {
                 EntityPlayerMP player = (EntityPlayerMP)obj;
                 if (!id.equals(player.getUniqueID())) continue;
-                if (player.isSneaking() && FoliageDrop.eligible(player)) FoliageDrop.start(player);
+                if (FoliageDrop.eligible(player)) FoliageDrop.start(player);
                 break;
             }
         }
