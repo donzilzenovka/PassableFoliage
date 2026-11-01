@@ -14,7 +14,7 @@ public class FoliageTransformer implements IClassTransformer {
         new ClassReader(bytes).accept(node, 0);
         boolean patched = false;
         for (MethodNode method : node.methods) {
-            if (!method.name.equals("addCollisionBoxesToList") && !method.name.equals("func_149743_a")) continue;
+            if (!method.name.equals("addCollisionBoxesToList") && !method.name.equals("func_149743_a") && !method.name.equals("a")) continue;
             // World, x, y, z, AxisAlignedBB, List, Entity
             if (!method.desc.endsWith("Lnet/minecraft/entity/Entity;)V") &&
                 !method.desc.endsWith("Lsa;)V")) continue;
@@ -35,7 +35,7 @@ public class FoliageTransformer implements IClassTransformer {
             method.instructions.insert(prefix);
             patched = true;
         }
-        if (!patched) throw new IllegalStateException("PassableFoliage: Block collision method not found");
+        if (!patched) { System.err.println("[PassableFoliage] WARNING: Block collision method not found; leaving class unchanged"); return bytes; }
         ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
         node.accept(writer);
         return writer.toByteArray();
