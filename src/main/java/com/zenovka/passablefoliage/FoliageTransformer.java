@@ -15,9 +15,17 @@ public class FoliageTransformer implements IClassTransformer {
         boolean patched = false;
         for (MethodNode method : node.methods) {
             if (!method.name.equals("addCollisionBoxesToList") && !method.name.equals("func_149743_a") && !method.name.equals("a")) continue;
-            // World, x, y, z, AxisAlignedBB, List, Entity
-            if (!method.desc.endsWith("Lnet/minecraft/entity/Entity;)V") &&
-                !method.desc.endsWith("Lsa;)V")) continue;
+            // Exact seven-argument collision-box method. Avoid func_149670_a (onEntityCollidedWithBlock).
+            org.objectweb.asm.Type[] args = org.objectweb.asm.Type.getArgumentTypes(method.desc);
+            if (org.objectweb.asm.Type.getReturnType(method.desc).getSort() != org.objectweb.asm.Type.VOID || args.length != 7) continue;
+            if (args[0].getSort() != org.objectweb.asm.Type.OBJECT ||
+                args[1].getSort() != org.objectweb.asm.Type.INT ||
+                args[2].getSort() != org.objectweb.asm.Type.INT ||
+                args[3].getSort() != org.objectweb.asm.Type.INT ||
+                args[4].getSort() != org.objectweb.asm.Type.OBJECT ||
+                args[5].getSort() != org.objectweb.asm.Type.OBJECT ||
+                args[6].getSort() != org.objectweb.asm.Type.OBJECT ||
+                !"java/util/List".equals(args[5].getInternalName())) continue;
             InsnList prefix = new InsnList();
             LabelNode continueLabel = new LabelNode();
             prefix.add(new VarInsnNode(Opcodes.ALOAD, 0));
