@@ -7,12 +7,13 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.config.Configuration;
 
-@Mod(modid = "passablefoliage", name = "Passable Foliage", version = "0.4.1", acceptableRemoteVersions = "*")
+@Mod(modid = "passablefoliage", name = "Passable Foliage", version = "0.5.0", acceptableRemoteVersions = "*")
 public class PassableFoliage {
     public static boolean naturalOnly = true;
     public static boolean unknownLeavesNatural = true;
     public static boolean sneakToDescend = false;
     public static double foliageSlowdown = 1.85D;
+    public static double foliageSinkDepth = 0.125D;
     public static volatile List<LeafEntry> additionalLeaves = new ArrayList<LeafEntry>();
 
     @Mod.EventHandler
@@ -24,6 +25,8 @@ public class PassableFoliage {
         sneakToDescend = config.getBoolean("sneakToDescend", "general", true, "Sneak to drop through eligible leaf blocks.");
         foliageSlowdown = config.getFloat("foliageSlowdown", "general", 1.85F, 0.0F, 2.0F,
             "Horizontal velocity resistance inside foliage (0 = off, 1 = full damping, above 1 = rebound, 2 = full reversal).");
+        foliageSinkDepth = config.getFloat("foliageSinkDepth", "general", 0.125F, 0.0F, 0.5F,
+            "How far the player sinks into the top of eligible foliage (blocks; 0 disables sinking).");
         String[] entries = config.getStringList("additionalLeaves", "general", new String[0],
             "Additional passable foliage: modid:blockname:meta or modid:blockname:* (all metadata). Entries override automatic leaf detection.");
         List<LeafEntry> parsed = new ArrayList<LeafEntry>();

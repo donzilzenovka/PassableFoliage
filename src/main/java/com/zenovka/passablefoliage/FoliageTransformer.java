@@ -33,10 +33,12 @@ public class FoliageTransformer implements IClassTransformer {
             prefix.add(new VarInsnNode(Opcodes.ILOAD, 2));
             prefix.add(new VarInsnNode(Opcodes.ILOAD, 3));
             prefix.add(new VarInsnNode(Opcodes.ILOAD, 4));
+            prefix.add(new VarInsnNode(Opcodes.ALOAD, 5));
+            prefix.add(new VarInsnNode(Opcodes.ALOAD, 6));
             prefix.add(new VarInsnNode(Opcodes.ALOAD, 7));
             prefix.add(new MethodInsnNode(Opcodes.INVOKESTATIC,
                 "com/zenovka/passablefoliage/FoliageHooks", "omitCollision",
-                "(Lnet/minecraft/block/Block;Lnet/minecraft/world/World;IIILnet/minecraft/entity/Entity;)Z", false));
+                "(Lnet/minecraft/block/Block;Lnet/minecraft/world/World;IIILnet/minecraft/util/AxisAlignedBB;Ljava/util/List;Lnet/minecraft/entity/Entity;)Z", false));
             prefix.add(new JumpInsnNode(Opcodes.IFEQ, continueLabel));
             prefix.add(new InsnNode(Opcodes.RETURN));
             prefix.add(continueLabel);
