@@ -9,7 +9,7 @@ Players may enter leaf blocks from the side or below; leaves still support playe
 Generated at `config/passablefoliage.cfg`:
 - `naturalLeavesOnly=true` — vanilla player-placed leaves stay solid.
 - `unknownModdedLeavesNatural=true` — modded leaves detected through Forge `isLeaves` are eligible.
-- Sneak + Jump while standing on eligible leaves triggers a short downward drop. The server validates requests for SMP.
+- `sneakToDescend=true` — sneaking makes eligible foliage non-solid to the player, allowing descent. This uses ordinary server-side player sneak state; no custom packet required.
 - `additionalLeaves` — extra blocks to treat as passable foliage, even if Forge does not report them as leaves.
 
 Example Forge configuration:

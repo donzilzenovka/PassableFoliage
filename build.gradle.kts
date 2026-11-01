@@ -3,7 +3,7 @@ plugins {
     id("com.gtnewhorizons.retrofuturagradle") version "1.4.9"
 }
 group = "com.zenovka"
-version = "0.2.1"
+version = "0.3.0"
 base { archivesName.set("PassableFoliage") }
 java { toolchain.languageVersion.set(JavaLanguageVersion.of(8)) }
 minecraft {
