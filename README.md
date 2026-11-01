@@ -10,6 +10,19 @@ Generated at `config/passablefoliage.cfg`:
 - `naturalLeavesOnly=true` — vanilla player-placed leaves stay solid.
 - `unknownModdedLeavesNatural=true` — modded leaves detected through Forge `isLeaves` are eligible.
 - `sneakToDescend=false` — optional canopy drop-through.
+- `additionalLeaves` — extra blocks to treat as passable foliage, even if Forge does not report them as leaves.
+
+Example Forge configuration:
+
+```properties
+S:additionalLeaves <
+    BiomesOPlenty:leaves:*
+    examplemod:decorative_leaves:2
+    examplemod:decorative_leaves:5
+>
+```
+
+Each entry uses `modid:blockname:meta`. Metadata may be 0–15 or `*` for all variants. These are example names; use actual registered block IDs. Explicit entries override natural-leaf restrictions, including vanilla placed-leaf metadata. Restart Minecraft after changing the list.
 
 ## Build
 
