@@ -7,7 +7,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.config.Configuration;
 
-@Mod(modid = "passablefoliage", name = "Passable Foliage", version = "0.5.0", acceptableRemoteVersions = "*")
+@Mod(modid = "passablefoliage", name = "Passable Foliage", version = "0.5.1", acceptableRemoteVersions = "*")
 public class PassableFoliage {
     public static boolean naturalOnly = true;
     public static boolean unknownLeavesNatural = true;
