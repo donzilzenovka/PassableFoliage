@@ -11,7 +11,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid = "passablefoliage", name = "Passable Foliage", version = "0.2.2", acceptableRemoteVersions = "*")
+@Mod(modid = "passablefoliage", name = "Passable Foliage", version = "0.2.3", acceptableRemoteVersions = "*")
 public class PassableFoliage {
     public static SimpleNetworkWrapper network;
     public static boolean naturalOnly = true;

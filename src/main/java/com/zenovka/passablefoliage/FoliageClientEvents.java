@@ -4,6 +4,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.settings.KeyBinding;
 
 public class FoliageClientEvents {
     private boolean held;
@@ -18,12 +19,12 @@ public class FoliageClientEvents {
             && mc.gameSettings.keyBindJump.getIsKeyPressed();
         if (!combo) { held = false; return; }
         if (FoliageDrop.active(player)) {
-            mc.gameSettings.keyBindJump.pressed = false;
+            KeyBinding.setKeyBindState(mc.gameSettings.keyBindJump.getKeyCode(), false);
             if (player.movementInput != null) player.movementInput.jump = false;
             return;
         }
         if (!held && FoliageDrop.eligible(player)) {
-            mc.gameSettings.keyBindJump.pressed = false;
+            KeyBinding.setKeyBindState(mc.gameSettings.keyBindJump.getKeyCode(), false);
             if (player.movementInput != null) player.movementInput.jump = false;
             FoliageDrop.start(player);
             PassableFoliage.network.sendToServer(new FoliagePacket());
