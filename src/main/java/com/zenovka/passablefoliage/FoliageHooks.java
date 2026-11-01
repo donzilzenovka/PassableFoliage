@@ -11,6 +11,13 @@ public final class FoliageHooks {
 
     public static boolean omitCollision(Block block, World world, int x, int y, int z, Entity entity) {
         if (!(entity instanceof EntityPlayer) || world == null || block == null || entity.boundingBox == null) return false;
+        if (FoliageDrop.active((EntityPlayer)entity)) return true;
+        if (!isEligible(block, world, x, y, z)) return false;
+        return entity.boundingBox.minY < y + 0.99D;
+    }
+
+    public static boolean isEligible(Block block, World world, int x, int y, int z) {
+        if (block == null || world == null) return false;
         int meta = world.getBlockMetadata(x, y, z);
         boolean explicit = false;
         for (LeafEntry entry : PassableFoliage.additionalLeaves) {
@@ -24,7 +31,6 @@ public final class FoliageHooks {
                 return false;
             }
         }
-        if (PassableFoliage.sneakToDescend && entity.isSneaking()) return true;
-        return entity.boundingBox.minY < y + 0.99D;
+        return true;
     }
 }

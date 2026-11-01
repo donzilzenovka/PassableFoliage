@@ -3,11 +3,16 @@ package com.zenovka.passablefoliage;
 import java.util.ArrayList;
 import java.util.List;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.config.Configuration;
 
-@Mod(modid = "passablefoliage", name = "Passable Foliage", version = "0.1.1", acceptableRemoteVersions = "*")
+@Mod(modid = "passablefoliage", name = "Passable Foliage", version = "0.2.0", acceptableRemoteVersions = "*")
 public class PassableFoliage {
+    public static SimpleNetworkWrapper network;
     public static boolean naturalOnly = true;
     public static boolean unknownLeavesNatural = true;
     public static boolean sneakToDescend = false;
@@ -19,7 +24,7 @@ public class PassableFoliage {
         config.load();
         naturalOnly = config.getBoolean("naturalLeavesOnly", "general", true, "Only pass through naturally generated vanilla leaves.");
         unknownLeavesNatural = config.getBoolean("unknownModdedLeavesNatural", "general", true, "Treat modded leaves without known placement metadata as natural.");
-        sneakToDescend = config.getBoolean("sneakToDescend", "general", false, "Sneaking permits descending through the canopy.");
+        sneakToDescend = false; // Replaced by deliberate Sneak + Jump input.
         String[] entries = config.getStringList("additionalLeaves", "general", new String[0],
             "Additional passable foliage: modid:blockname:meta or modid:blockname:* (all metadata). Entries override automatic leaf detection.");
         List<LeafEntry> parsed = new ArrayList<LeafEntry>();
@@ -30,5 +35,9 @@ public class PassableFoliage {
         }
         additionalLeaves = parsed;
         if (config.hasChanged()) config.save();
+        network = NetworkRegistry.INSTANCE.newSimpleChannel("passfoliage");
+        network.registerMessage(FoliagePacket.Handler.class, FoliagePacket.class, 0, Side.SERVER);
+        FMLCommonHandler.instance().bus().register(new FoliageServerEvents());
+        if (FMLCommonHandler.instance().getSide().isClient()) FMLCommonHandler.instance().bus().register(new FoliageClientEvents());
     }
 }
