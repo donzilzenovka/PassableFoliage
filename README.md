@@ -9,7 +9,7 @@ Players may enter leaf blocks from the side or below; leaves still support playe
 Generated at `config/passablefoliage.cfg`:
 - `naturalLeavesOnly=true` — vanilla player-placed leaves stay solid.
 - `unknownModdedLeavesNatural=true` — modded leaves detected through Forge `isLeaves` are eligible.
-- `foliageSlowdown=0.15` — damp horizontal velocity by 15% per tick while intersecting eligible foliage (range 0–0.8). Vertical movement is unchanged.\n- `sneakToDescend=true` — sneaking makes eligible foliage non-solid to the player, allowing descent. This uses ordinary server-side player sneak state; no custom packet required.
+- `foliageSlowdown=1.85` — horizontal velocity multiplier is (1 − setting) while intersecting eligible foliage (range 0–2). Values above 1 reverse velocity, producing rebound; vertical movement is unchanged. Existing config files retain their previous values until edited.\n- `sneakToDescend=true` — sneaking makes eligible foliage non-solid to the player, allowing descent. This uses ordinary server-side player sneak state; no custom packet required.
 - `additionalLeaves` — extra blocks to treat as passable foliage, even if Forge does not report them as leaves.
 
 Example Forge configuration:

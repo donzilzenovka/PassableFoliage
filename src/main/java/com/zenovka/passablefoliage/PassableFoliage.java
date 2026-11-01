@@ -7,12 +7,12 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.config.Configuration;
 
-@Mod(modid = "passablefoliage", name = "Passable Foliage", version = "0.4.0", acceptableRemoteVersions = "*")
+@Mod(modid = "passablefoliage", name = "Passable Foliage", version = "0.4.1", acceptableRemoteVersions = "*")
 public class PassableFoliage {
     public static boolean naturalOnly = true;
     public static boolean unknownLeavesNatural = true;
     public static boolean sneakToDescend = false;
-    public static double foliageSlowdown = 0.15D;
+    public static double foliageSlowdown = 1.85D;
     public static volatile List<LeafEntry> additionalLeaves = new ArrayList<LeafEntry>();
 
     @Mod.EventHandler
@@ -22,8 +22,8 @@ public class PassableFoliage {
         naturalOnly = config.getBoolean("naturalLeavesOnly", "general", true, "Only pass through naturally generated vanilla leaves.");
         unknownLeavesNatural = config.getBoolean("unknownModdedLeavesNatural", "general", true, "Treat modded leaves without known placement metadata as natural.");
         sneakToDescend = config.getBoolean("sneakToDescend", "general", true, "Sneak to drop through eligible leaf blocks.");
-        foliageSlowdown = config.getFloat("foliageSlowdown", "general", 0.15F, 0.0F, 0.8F,
-            "Fraction of horizontal velocity damped each tick while inside foliage (0 = off, 0.15 = gentle resistance).");
+        foliageSlowdown = config.getFloat("foliageSlowdown", "general", 1.85F, 0.0F, 2.0F,
+            "Horizontal velocity resistance inside foliage (0 = off, 1 = full damping, above 1 = rebound, 2 = full reversal).");
         String[] entries = config.getStringList("additionalLeaves", "general", new String[0],
             "Additional passable foliage: modid:blockname:meta or modid:blockname:* (all metadata). Entries override automatic leaf detection.");
         List<LeafEntry> parsed = new ArrayList<LeafEntry>();
