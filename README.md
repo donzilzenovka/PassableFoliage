@@ -19,10 +19,11 @@ S:additionalLeaves <
     BiomesOPlenty:leaves:*
     examplemod:decorative_leaves:2
     examplemod:decorative_leaves:5
+    te:gregtech.tileentity.plants.MultiTileEntityBush
 >
 ```
 
-Each entry uses `modid:blockname:meta`. Metadata may be 0–15 or `*` for all variants. These are example names; use actual registered block IDs. Explicit entries override natural-leaf restrictions, including vanilla placed-leaf metadata. Restart Minecraft after changing the list.
+Block entries use `modid:blockname:meta`. Metadata may be 0–15 or `*` for all variants. Tile-entity entries use `te:fully.qualified.TileEntityClass` and match the exact runtime tile-entity class at the block position (without a compile-time dependency on that mod). These are example names; use actual registered block IDs. Explicit entries override natural-leaf restrictions, including vanilla placed-leaf metadata. Restart Minecraft after changing the list.
 
 ## Build
 
