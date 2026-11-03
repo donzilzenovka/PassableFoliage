@@ -43,7 +43,7 @@ public final class FoliageHooks {
         int meta = world.getBlockMetadata(x, y, z);
         boolean explicit = false;
         for (LeafEntry entry : PassableFoliage.additionalLeaves) {
-            if (entry.matches(block, meta)) { explicit = true; break; }
+            if (entry.matches(block, meta, world, x, y, z)) { explicit = true; break; }
         }
         if (!explicit && !block.isLeaves(world, x, y, z)) return false;
         if (!explicit && PassableFoliage.naturalOnly) {
