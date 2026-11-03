@@ -28,7 +28,7 @@ public class PassableFoliage {
         foliageSinkDepth = config.getFloat("foliageSinkDepth", "general", 0.125F, 0.0F, 0.5F,
             "How far the player sinks into the top of eligible foliage (blocks; 0 disables sinking).");
         String[] entries = config.getStringList("additionalLeaves", "general", new String[0],
-            "Additional passable foliage: modid:blockname:meta or modid:blockname:* (all metadata). Entries override automatic leaf detection.");
+            "Additional passable foliage: modid:blockname:meta, modid:blockname:* (all metadata), or te:fully.qualified.TileEntityClass (exact tile-entity class, e.g. te:gregtech.tileentity.plants.MultiTileEntityBush). Entries override automatic leaf detection.");
         List<LeafEntry> parsed = new ArrayList<LeafEntry>();
         for (String entry : entries) {
             LeafEntry rule = LeafEntry.parse(entry);
